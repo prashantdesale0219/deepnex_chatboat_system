@@ -1,0 +1,182 @@
+# Chatbot API Endpoints
+
+Base URL: http://localhost:5000
+
+## Authentication Endpoints
+
+### Register User
+POST /api/auth/register
+Content-Type: application/json
+
+Request Body:
+{
+  "name": "Test User",
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+### Login User
+POST /api/auth/login
+Content-Type: application/json
+
+Request Body:
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+### Get Current User
+GET /api/auth/me
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Update User Details
+PUT /api/auth/update-details
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+Request Body:
+{
+  "name": "Updated Name",
+  "email": "updated@example.com"
+}
+
+### Update Password
+PUT /api/auth/update-password
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+Request Body:
+{
+  "currentPassword": "password123",
+  "newPassword": "newpassword123"
+}
+
+## Configuration Endpoints
+
+### Create Configuration
+POST /api/configs
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+Request Body:
+{
+  "name": "Customer Support Bot",
+  "purpose": "Help customers with product inquiries",
+  "domain": ["e-commerce", "customer support"],
+  "tone": {
+    "style": "friendly",
+    "language": "en"
+  },
+  "channels": ["web", "mobile"],
+  "integrations": ["zendesk"]
+}
+
+### Get All Configurations
+GET /api/configs
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Get Single Configuration
+GET /api/configs/:id
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Update Configuration
+PUT /api/configs/:id
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+Request Body:
+{
+  "name": "Updated Bot Name",
+  "purpose": "Updated purpose",
+  "tone": {
+    "style": "professional",
+    "language": "en"
+  }
+}
+
+### Delete Configuration
+DELETE /api/configs/:id
+Authorization: Bearer YOUR_JWT_TOKEN
+
+## Session Endpoints
+
+### Create Session
+POST /api/sessions
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+Request Body:
+{
+  "configId": "615f7d4e1c9d440000a1b3e5"  // Replace with your actual MongoDB ObjectId, this is just an example
+}
+
+### Get All Sessions
+GET /api/sessions
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Get Single Session
+GET /api/sessions/:sessionId
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Delete Session
+DELETE /api/sessions/:sessionId
+Authorization: Bearer YOUR_JWT_TOKEN
+
+### Send Message
+POST /api/sessions/:sessionId/messages
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+Request Body:
+{
+  "message": "Hello, I need help with my order"
+}
+
+### Get Conversation History
+GET /api/sessions/:sessionId/messages
+Authorization: Bearer YOUR_JWT_TOKEN
+
+## Webhook Endpoint
+
+### External Channel Integration
+POST /api/webhook
+Authorization: Bearer YOUR_JWT_TOKEN
+Content-Type: application/json
+
+Request Body:
+{
+  "configId": "615f7d4e1c9d440000a1b3e5",  // Replace with your actual MongoDB ObjectId, this is just an example
+  "userId": "external_user_123",
+  "message": "Hello from external channel",
+  "sessionId": "615f7d4e1c9d440000a1b3e6",  // Optional: Replace with your actual session ID, this is just an example
+  "channel": "slack"
+}
+
+## API Documentation
+
+Swagger UI: http://localhost:5000/api-docs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
